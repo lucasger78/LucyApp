@@ -1,0 +1,54 @@
+<!-- pedidos/templates/pedidos/formulario_cliente.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Datos del Cliente{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Completar Datos del Cliente</h2>
+        
+        <form method="POST" action="{% url 'enviar_pedido' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre_completo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="senia">Seña ($):</label>
+                <input type="number" id="senia" name="senia" min="0" value="0" step="0.01">
+            </div>
+            
+            <input type="hidden" name="carrito" id="carrito-data">
+            
+            <button type="submit" class="btn-submit">Finalizar Pedido</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carrito = sessionStorage.getItem('carrito');
+            document.getElementById('carrito-data').value = carrito;
+            
+            document.querySelector('form').addEventListener('submit', function(e) {
+                const carrito = JSON.parse(sessionStorage.getItem('carrito') || '{}');
+                if (Object.keys(carrito).length === 0) {
+                    e.preventDefault();
+                    alert('¡El carrito está vacío!');
+                }
+            });
+        });
+    </script>
+{% endblock %}
