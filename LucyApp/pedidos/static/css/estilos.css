@@ -1,8 +1,8 @@
 /* static/css/estilos.css */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "TikTok Sans", sans-serif;
+    /* font-weight: 900; */
     line-height: 1.6;
-    /* margin: 0; */
     padding: 0;
     color: #333;
     margin: 20px;
@@ -27,7 +27,7 @@ nav {
 nav a {
     margin-right: 1rem;
     text-decoration: none;
-    color: #ca2045;
+    color: #ee1e4b;
 }
 
 main {
@@ -95,7 +95,7 @@ footer {
 }
 
 .btn-submit {
-    background-color: #ca2045;
+    background-color: #ee1e4b;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -104,7 +104,7 @@ footer {
 }
 
 .btn-submit:hover {
-    background-color: #96112d;
+    background-color: #943d50;
 }
 
 /* Estilos para la página de gracias */
@@ -119,14 +119,14 @@ footer {
     display: inline-block;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
-    background-color: #ca2045;
+    background-color: #ee1e4b;
     color: white;
     text-decoration: none;
     border-radius: 4px;
 }
 
 .btn-back:hover {
-    background-color: #96112d;
+    background-color: #943d50;
 }
 
 
@@ -155,7 +155,7 @@ footer {
 }
 
 .btn-confirmar {
-    background: #ca2045;
+    background: #ee1e4b;
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;
@@ -165,7 +165,7 @@ footer {
 }
 
 .btn-confirmar:hover {
-    background-color: #96112d;
+    background-color: #943d50;
 }
 
 .btn-editar {
@@ -176,10 +176,6 @@ footer {
     text-decoration: none;
     margin-left: 1rem;
 }
-
-
-
-
 .item-pedido {
     margin-bottom: 15px;
     padding-bottom: 15px;
@@ -200,14 +196,14 @@ button, .boton-editar {
      cursor: pointer;
  }
  button {
-    background-color: #ca2045;
+    background-color: #ee1e4b;
     color: white;
     border: none;
     border-radius: 4px;
  }
 
  button:hover {
-      background-color: #96112d;
+      background-color: #943d50;
       color: white;
       border: none;
       border-radius: 4px;
@@ -238,7 +234,7 @@ button, .boton-editar {
         
 .btn-filtro {
     padding: 8px 16px;
-    background-color: #ca2045;
+    background-color: #ee1e4b;
     /* border: 1px solid #ddd; */
     border-radius: 4px;
     cursor: pointer;
@@ -246,19 +242,20 @@ button, .boton-editar {
  }
         
 .btn-filtro:hover {
-    background-color: #96112d;
+    background-color: #943d50;
+    
 }
         
 .btn-filtro.active {
-    background-color: #96112d;
+    background-color: #943d50;
     color: white;
-    /* border-color: #4CAF50; */
+    
 }
 
 .btn-filtro.active:hover {
-    background-color: #ca2045;
+    background-color: #ee1e4b;
     color: white;
-    /* border-color: #4CAF50; */
+    
 }
         
 .producto {

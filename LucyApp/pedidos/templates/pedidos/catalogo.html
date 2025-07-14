@@ -3,9 +3,9 @@
 
 {% block title %}Catálogo de Productos{% endblock %}
 
-{% block extra_js %}
+{% comment %} {% block extra_js %}
 <script src="{% static 'js/carrito.js' %}"></script>
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 {% block content %}
     <h2>Crear Pedido Nuevo</h2>
@@ -13,9 +13,9 @@
     <!-- Filtro por categorías -->
     <div class="filtro-categorias">
         <button class="btn-filtro active" data-categoria="todas">Todas</button>
-        <button class="btn-filtro" data-categoria="panaderia">Panadería</button>
-        <button class="btn-filtro" data-categoria="pasteleria">Pastelería</button>
-        <button class="btn-filtro" data-categoria="heladeria">Heladería</button>
+        <button class="btn-filtro" data-categoria="panadería">Panadería</button>
+        <button class="btn-filtro" data-categoria="pastelería">Pastelería</button>
+        <button class="btn-filtro" data-categoria="heladería">Heladería</button>
     </div>
 
     <div id="productos">
@@ -48,26 +48,29 @@
     <script>
     let carrito = {};
 
-    // Función para filtrar productos por categoría
-    function filtrarProductos(categoria) {
-        const productos = document.querySelectorAll('.producto');
-        
-        productos.forEach(producto => {
-            if (categoria === 'todas' || producto.dataset.categoria === categoria) {
-                producto.style.display = 'block';
-            } else {
-                producto.style.display = 'none';
-            }
-        });
-        
-        // Actualizar botones activos
-        document.querySelectorAll('.btn-filtro').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.categoria === categoria) {
-                btn.classList.add('active');
-            }
-        });
-    }
+   function filtrarProductos(categoria) {
+    const productos = document.querySelectorAll('.producto');
+    
+    productos.forEach(producto => {
+        if (categoria === 'todas') {
+            producto.style.display = 'block';
+        } else {
+            // Comparar ignorando mayúsculas/minúsculas
+            const catProducto = producto.dataset.categoria.toLowerCase();
+            producto.style.display = catProducto.includes(categoria.toLowerCase()) ? 'block' : 'none';
+        }
+    });
+    
+    // Actualizar botones activos
+    document.querySelectorAll('.btn-filtro').forEach(btn => {
+        btn.classList.remove('active');
+        if (categoria === 'todas' && btn.dataset.categoria === categoria) {
+            btn.classList.add('active');
+        } else if (btn.dataset.categoria.toLowerCase() === categoria.toLowerCase()) {
+            btn.classList.add('active');
+        }
+    });
+}
 
     // Función mejorada para guardar el carrito
     async function guardarCarrito() {

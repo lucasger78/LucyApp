@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -149,5 +150,38 @@ SESSION_COOKIE_SECURE = False  # True en producción con HTTPS
 # LOGIN_REDIRECT_URL = 'catalogo'  # Redirigir aquí después de login
 # LOGOUT_REDIRECT_URL = 'login'  # Redirigir aquí después de logout
 LOGIN_URL = '/accounts/login/'  # Si decides usar login más adelante
-LOGIN_REDIRECT_URL = '/pedidos/catalogo/'
-LOGOUT_REDIRECT_URL = '/pedidos/catalogo/'
+LOGIN_REDIRECT_URL = '/admin/'
+LOGOUT_REDIRECT_URL = '/admin/login/'
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "LucyApp Admin",
+    "site_header": "LucyApp",
+    "site_brand": "LucyApp",
+    "welcome_sign": "Bienvenid@ a LucyApp",
+    "site_logo": "pedidos/img/logo-white.png",
+    "site_icon": "pedidos/img/logo.png",  # favicon
+    "site_logo_classes": "img-circle",
+    "site_icon": "pedidos/img/logo.png",
+    "user_avatar": "pedidos/img/logo-white.png",
+  # logo como avatar
+
+    # Modo oscuro
+    "bootswatch_theme": "darkly", # uno de los temas bootstrap de bootswatch
+
+    # Login
+    "login_logo": "pedidos/img/logo.png",
+    "login_logo_height": "180px",
+    
+    "custom_css": "pedidos/css/custom-admin.css",  # usamos css personalizado
+
+    # Otros ajustes útiles
+    "show_ui_builder": False,
+}
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pedidos/static')]
+
+
+
+
+

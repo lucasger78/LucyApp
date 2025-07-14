@@ -55,7 +55,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
 admin.site.site_header = format_html(
     '<img src="{}" height="60" style="margin-right:15px; vertical-align:middle;">'
     '<span style="color: #fff; font-size: 24px; vertical-align:middle; line-height:60px;">Lucy Cosas Ricas</span>',
-    '/static/pedidos/img/logo.png'
+    '/static/pedidos/img/logo-white.png'
 )
 
 admin.site.site_title = "Administración Lucy Cosas Ricas"

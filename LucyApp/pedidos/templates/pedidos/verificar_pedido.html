@@ -59,163 +59,123 @@
 
 <style>
     .confirmacion-pedido {
-        max-width: 900px;
+        max-width: 800px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 15px;
         background: #fff;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+        line-height: 1.4;
+    }
+    
+    h1 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.5em;
+        color: #333;
+    }
+    
+    h2 {
+        margin: 12px 0 8px 0;
+        font-size: 1.2em;
+        color: #444;
     }
     
     .datos-pedido, .datos-cliente {
         background: #f8f9fa;
-        padding: 15px;
+        padding: 10px 15px;
         border-radius: 5px;
-        margin-bottom: 20px;
+        margin-bottom: 8px;
+    }
+    
+    .datos-pedido p, .datos-cliente p {
+        margin: 6px 0;
     }
     
     .tabla-items {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin: 8px 0;
+        font-size: 0.95em;
     }
     
     .tabla-items th, .tabla-items td {
-        padding: 12px;
+        padding: 8px 10px;
         border: 1px solid #ddd;
         text-align: left;
     }
     
     .tabla-items th {
         background-color: #f2f2f2;
+        font-weight: 600;
     }
     
     .totales {
-        margin: 20px 0;
-        font-size: 1.1em;
+        margin: 8px 0;
+        font-size: 1.05em;
         text-align: right;
-        padding: 10px;
+        padding: 8px 10px;
         background: #f8f9fa;
         border-radius: 5px;
     }
     
     .botones {
         display: flex;
-        gap: 15px;
-        margin-top: 20px;
+        gap: 12px;
+        margin-top: 8px;
+        justify-content: flex-end;
+    }
+    
+    .btn-confirmar, .btn-imprimir {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
     }
     
     .btn-confirmar {
-        background-color: #4CAF50;
+        background-color: #ee1e4b;
         color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
     }
     
     .btn-imprimir {
-        background-color: #2196F3;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
+        background-color: #aaa9a9ff;
+        color: #ee1e4b;
+        {% comment %} border: solid 1px #ee1e4b; {% endcomment %}
+        
     }
     
     .btn-confirmar:hover {
-        background-color: #45a049;
+        background-color: #943d50;
+        color: #f5f5f5;
     }
     
     .btn-imprimir:hover {
-        background-color: #0b7dda;
+        background-color: #ee1e4b;
+    
+    }
+    
+    /* Estilo para impresión */
+    @media print {
+        .botones {
+            display: none;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        .confirmacion-pedido {
+            box-shadow: none;
+            padding: 0;
+        }
     }
 </style>
+
 {% endblock %}
 
 
 
 
 
-{% comment %} {% extends 'base.html' %}
-
-{% block content %}
-<div class="confirmacion-pedido">
-    <h2>Confirma tu Pedido #{{ pedido.id }}</h2>
-    
-    <div class="datos-cliente">
-        <h3>Datos del Cliente</h3>
-        <p><strong>Nombre:</strong> {{ pedido.cliente.nombre_completo }}</p>
-        <p><strong>Email:</strong> {{ pedido.cliente.email }}</p>
-        <p><strong>Teléfono:</strong> {{ pedido.cliente.telefono }}</p>
-        <p><strong>Dirección:</strong> {{ pedido.cliente.direccion }}</p>
-    </div>
-    
-    <div class="items-pedido">
-        <h3>Productos</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.producto.nombre }}</td>
-                    <td>{{ item.cantidad }}</td>
-                    <td>${{ item.producto.precio }}</td>
-                    <td>${{ item.subtotal }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        
-        <div class="totales">
-            <p><strong>Total:</strong> ${{ pedido.total }}</p>
-            <p><strong>Seña:</strong> ${{ pedido.senia }}</p>            
-            <p><strong>Total a Pagar:</strong> ${{ pedido.total_final|floatformat:2 }}</p>            
-        </div>
-    </div>
-    
-    <form method="post">
-        {% csrf_token %}
-        <div class="botones">
-            <button type="submit" class="btn-confirmar">Confirmar Pedido</button>
-            <button onclick="window.print()" class="btn btn-secondary">Imprimir Pedido</button>
-           
-        </div><br>
-    </form>
-     
-</div>
-<div class="estado-pedido {% if pedido.completado %}completado{% else %}pendiente{% endif %}">
-    Estado: {% if pedido.completado %}✅ Completado{% else %}🕒 Pendiente{% endif %}
-</div>
-
-<style>
-    .tabla-items {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    .tabla-items th, .tabla-items td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    .totales {
-        margin: 20px 0;
-        font-size: 1.1em;
-    }
-    .botones {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
-    }
-</style>
-{% endblock %} {% endcomment %}
