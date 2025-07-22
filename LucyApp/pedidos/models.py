@@ -35,13 +35,13 @@ class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    senia = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    seña = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_final = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     completado = models.BooleanField(default=False)
     
     def save(self, *args, **kwargs):
         """Calcula automáticamente el total_final antes de guardar"""
-        self.total_final = max(Decimal('0'), self.total - self.senia)  # Evita valores negativos
+        self.total_final = max(Decimal('0'), self.total - self.seña)  # Evita valores negativos
         super().save(*args, **kwargs)
     
     def __str__(self):

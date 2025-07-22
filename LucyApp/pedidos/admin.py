@@ -27,10 +27,10 @@ class ItemPedidoInline(admin.TabularInline):
 class PedidoResource(resources.ModelResource):
     class Meta:
         model = Pedido
-        fields = ('id', 'cliente__nombre_completo', 'fecha', 'total', 'senia', 'total_final')
+        fields = ('id', 'cliente__nombre_completo', 'fecha', 'total', 'seña', 'total_final')
 
 class PedidoAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'cliente', 'fecha', 'total', 'senia', 'total_final', 'completado')
+    list_display = ('id', 'cliente', 'fecha', 'total', 'seña', 'total_final', 'completado')
     inlines = [ItemPedidoInline]
     list_filter = ('completado', 'fecha')
     readonly_fields = ('fecha',)
@@ -45,7 +45,7 @@ class ClienteAdmin(ImportExportModelAdmin):
     list_per_page = 20
 
 # Configuración para Empleado (si aún lo necesitas)
-class EmpleadoAdmin(admin.ModelAdmin):
+class EmpleadoAdmin(ImportExportModelAdmin):
     list_display = ('nombre', 'activo')
     list_filter = ('activo',)
     
